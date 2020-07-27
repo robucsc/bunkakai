@@ -276,9 +276,9 @@ class Art extends Phaser.Scene {
             this.collectableItem[1].update();
             this.collectableItem[2].update();
         }
-
+        // this.clock.getElapsedSeconds() > 5
         // crissCross - evasive pattern for collectables
-        if (this.clock.getElapsedSeconds() > 5) {
+        if (true) {
             this.utilities.crissCross(this.collectableItem[0]);
             this.utilities.crissCross(this.collectableItem[1]);
             this.utilities.crissCross(this.collectableItem[2]);

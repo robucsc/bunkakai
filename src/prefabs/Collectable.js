@@ -10,6 +10,7 @@ class Collectable extends Phaser.Physics.Arcade.Sprite{
         this.body.setAllowGravity(false);
         this.setScale(2, 2);
         this.setOrigin(0, 0);
+        this.crisscrossY = this.y;
 
         // store point value
         this.points = pointValue;
