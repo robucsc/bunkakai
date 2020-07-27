@@ -29,3 +29,5 @@ Group9
     
     Alex, Amanda, Nick, and Rob
     
+Special Thanks
+    Elizabeth, Nathan, Darcy, Enriko, Patrick, Thomas, JM, LX, XuanXuan, Tony

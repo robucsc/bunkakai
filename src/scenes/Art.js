@@ -108,7 +108,7 @@ class Art extends Phaser.Scene {
         this.playerOne = new Runner(this, 256, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
 
         // add antagonist to the scene
-        this.thief = new Antagonist(this, 1024, 512, 'antagonistRun', 0, 10, true).setScale(1, 1).setOrigin(0,0);
+        this.thief = new Antagonist(this, 1024, 512, 'antagonistWalk', 0, 10, true).setScale(1, 1).setOrigin(0,0);
 
         // create collider for playerOne and collectableItems
         this.physics.add.overlap(this.playerOne, this.palletsGroup, (obj1, obj2) => {
