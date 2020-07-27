@@ -149,13 +149,13 @@ class Art extends Phaser.Scene {
         // this.collectableItem.setScrollFactor(0);
 
         // add display hearts - normally these are setVisibale to false
-        this.displayKokoro = [this.add.sprite(1528, 48, 'bridge').setScale(1, 1).setOrigin(0, 0).setVisible(true).setScrollFactor(0),
+        this.displayKokoro = [this.add.sprite(1528, 48, 'bridge').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
             this.add.sprite(1568, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
             this.add.sprite(1608, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
             this.add.sprite(1648, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
             this.add.sprite(1688, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0)];
 
-        // graphics debug code
+        // graphics debug call - uncomment to use
         // this.utilities.graphicsDebug();
 
         // Particle System
@@ -351,35 +351,12 @@ class Art extends Phaser.Scene {
         collectable.reset(); // reset ship position
     }
 
-
-    // display kokoro - this should probably have been a switch statement
     kokoroMeter(capturedHearts) {
-        if (capturedHearts == 10) {
-            this.displayKokoro[0].setVisible(true);
-            setScale(0.75, 0.75)
-            this.kokoros += 1;
-        } else if (capturedHearts == 20) {
-            this.displayKokoro[1].setVisible(true);
-            this.kokoros += 1;
-        } else if (capturedHearts == 30) {
-            this.displayKokoro[2].setVisible(true);
-            this.kokoros += 1;
-        } else if (capturedHearts == 40) {
-            this.displayKokoro[3].setVisible(true);
-            this.kokoros += 1;
-        } else if (capturedHearts == 50) {
-            this.displayKokoro[4].setVisible(true);
+        if (capturedHearts % 10 == 0 && capturedHearts < 55) {
+            this.displayKokoro[capturedHearts/10 - 1].setVisible(true);
             this.kokoros += 1;
         }
     }
-
-    // kokoroMeter(capturedHearts) {
-    //     if (capturedHearts % 10 == 0 && capturedHearts < 55) {
-    //         this.displayKokoro[capturedHearts/10 - 1].setVisible(true);
-    //         this.kokoros += 1;
-    //         this.displayKokoro[capturedHearts/10 - 1].setScale(this.sineCounter.getValue(), this.sineCounter.getValue());
-    //     }
-    // }
 
     kokoroDropped() {
         console.log('the kokoro has been dropped');
