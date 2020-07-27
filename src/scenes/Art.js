@@ -27,9 +27,9 @@ class Art extends Phaser.Scene {
         this.antagonistVelocityX = -255
 
         // collectable flight path zones
-        this.top = 128;
-        this.middle = 320;
-        this.bottom = 512;
+        this.top = 256;
+        this.middle = 512;
+        this.bottom = 768;
 
         // make the sine tracker
         this.sineCounter = this.tweens.addCounter({
@@ -215,7 +215,7 @@ class Art extends Phaser.Scene {
 
         // Camera
         this.cameras.main.startFollow(this.playerOne);
-        this.cameras.main.followOffset.set(-756, 64);
+        this.cameras.main.followOffset.set(-700, 0);
         this.cameras.main.setDeadzone(1280, 1536);
         this.cameras.main.fadeIn(1500, 0, 0, 0)
         // console.log(this.cameras);
