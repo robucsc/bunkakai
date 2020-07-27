@@ -49,6 +49,7 @@ class Bunkakai extends Phaser.Scene{
         this.load.audio('fashionbgm', './assets/bunkakaiFashionGroove.mp3');
         this.load.audio('musicbgm', './assets/bunkakaiFashionGroove.mp3');
         this.load.audio('ohno', './assets/ohno.wav');
+        this.load.audio('readyGo', './assets/readyGo.ogg');
 
         // background images and decorations
         this.load.image('redHeart', './assets/redHeart.png');

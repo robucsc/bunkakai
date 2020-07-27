@@ -1,4 +1,4 @@
-// console.log("hello world");
+// Group9 Alex Borlin, Amanda Koepp, Rob Lodes, and Nicholas Shupe
 
 // create game configuration object
 let config = {
@@ -9,7 +9,7 @@ let config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            debug: false,
             gravity: {
                 x: 0,
                 y: 900

@@ -61,7 +61,7 @@ class Art extends Phaser.Scene {
             detune: 0,
             seek: 0,
             loop: true,
-            delay: 0.5 // start after half a second
+            delay: 2.5 // start after half a second
         }
         // BGM play, this was really tricky Big thanks to Ben and Darcy!
         if (this.sound.get('artbgm') == null) { // check to see if it exists
