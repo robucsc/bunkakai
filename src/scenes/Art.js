@@ -239,8 +239,8 @@ class Art extends Phaser.Scene {
 
         // Camera
         this.cameras.main.startFollow(this.playerOne);
-        this.cameras.main.followOffset.set(-448, 0); //700, 1280
-        this.cameras.main.setDeadzone(640, 1536); // yes I know this is wonky, I just couldn't get it to function correctly
+        this.cameras.main.followOffset.set(-448, 64);
+        this.cameras.main.setDeadzone(640, 1536); //
         this.cameras.main.fadeIn(1500, 0, 0, 0)
         // console.log(this.cameras); // for debugging - uncomment to use
     }

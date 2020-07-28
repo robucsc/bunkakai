@@ -42,8 +42,8 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
     }
 
     unTunnel(){
-        if (this.y >= 764){
-            this.y = 764;
+        if (this.y >= 892){
+            this.y = 892;
         }
     }
 
