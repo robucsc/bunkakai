@@ -31,6 +31,9 @@ class Art extends Phaser.Scene {
         this.middle = 384;
         this.bottom = 512;
 
+        // collectable Item points
+        this.collectableItemPoints = 50;
+
         // BGM config
         this.BGMconfig = {
             mute: false,
@@ -47,6 +50,7 @@ class Art extends Phaser.Scene {
             this.BGMmusic.play(this.BGMconfig); // play music
         }
 
+
         // place background images
         this.nightSky = this.add.tileSprite(0, 0, 1912, 1024, 'nightSky').setOrigin(0, 0).setVisible(true);
         this.nightSky.setScrollFactor(0);
@@ -54,8 +58,29 @@ class Art extends Phaser.Scene {
         this.day = this.add.tileSprite(0, 0, 1912, 1024, 'day').setOrigin(0, 0).setVisible(true);
         this.day.setScrollFactor(0);
 
+        // score
         var theScoreFrame = this.add.sprite(64, 46, 'scoreFrame').setScale(1.5, 1).setOrigin(0, 0); // scoreFrame desu
         theScoreFrame.setScrollFactor(0);
+
+        this.playerOneScore = 0;
+
+        // score display
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '32px',
+            // backgroundColor: '#f00',
+            color: '#000',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.scoreLeft = this.add.text(96, 48, this.playerOneScore, scoreConfig).setScrollFactor(0);
+        this.capturedHearts = 0;
+        this.kokoros = 0;
+
 
         // tile sets, maps, and collisions
         const groundMap = this.add.tilemap('grassLayerMap');
@@ -126,16 +151,25 @@ class Art extends Phaser.Scene {
             obj2.destroy(); // remove item on overlap
             // sound
             // other events
+            console.log('pallet points ', this.collectableItemPoints)
+            this.playerOneScore += this.collectableItemPoints;
+            this.scoreLeft.text = this.playerOneScore;
         });
         this.physics.add.overlap(this.playerOne, this.brushesGroup, (obj1, obj2) => {
             obj2.destroy(); // remove item on overlap
             // sound
             // other events
+            console.log('brush points ', this.collectableItemPoints)
+            this.playerOneScore += (this.collectableItemPoints * 2);
+            this.scoreLeft.text = this.playerOneScore;
         });
         this.physics.add.overlap(this.playerOne, this.notesGroup, (obj1, obj2) => {
             obj2.destroy(); // remove item on overlap
             // sound
             // other events
+            console.log('note points ', this.collectableItemPoints)
+            this.playerOneScore += (this.collectableItemPoints * 3);
+            this.scoreLeft.text = this.playerOneScore;
         });
 
         // add player world collider
@@ -205,25 +239,7 @@ class Art extends Phaser.Scene {
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T); // tutorial
         keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T); // mute audio
 
-        // score
-        this.playerOneScore = 0;
 
-        // score display
-        let scoreConfig = {
-            fontFamily: 'Courier',
-            fontSize: '32px',
-            // backgroundColor: '#f00',
-            color: '#000',
-            align: 'right',
-            padding: {
-                top: 5,
-                bottom: 5,
-            },
-            fixedWidth: 100
-        }
-        this.scoreLeft = this.add.text(96, 48, this.playerOneScore, scoreConfig).setScrollFactor(0);
-        this.capturedHearts = 0;
-        this.kokoros = 0;
 
         // game over flag
         this.gameOver = false;
@@ -356,7 +372,7 @@ class Art extends Phaser.Scene {
     }
 
     collected(collectable) {
-        collectable.alpha = 0;
+        // collectable.alpha = 0;
         this.playerOneScore += collectable.points;
         this.scoreLeft.text = this.playerOneScore;
         // this.centerEmitter.explode(23);
@@ -367,11 +383,11 @@ class Art extends Phaser.Scene {
             this.capturedHearts = 0;
         }
         this.sound.play('beem');
-        collectable.reset(); // reset position
+        // collectable.reset(); // reset position
     }
 
     kokoroMeter(capturedHearts) {
-        if (capturedHearts % 5 == 0 && capturedHearts < 26) {
+        if (capturedHearts % 5 == 0 && capturedHearts <= 25) {
             this.displayKokoro[capturedHearts/5 - 1].setVisible(true);
             this.kokoros += 1;
         }
@@ -381,7 +397,7 @@ class Art extends Phaser.Scene {
         console.log('the kokoro has been stolen');
         this.displayKokoro[this.kokoros - 1].setVisible(false);
         this.kokoros -= 1;
-        this.capturedHearts -= 10;
+        this.capturedHearts -= 5;
         if (this.capturedHearts < 0) {
             this.capturedHearts = 0;
         }
