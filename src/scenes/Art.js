@@ -28,30 +28,8 @@ class Art extends Phaser.Scene {
 
         // collectable flight path zones
         this.top = 256;
-        this.middle = 512;
-        this.bottom = 768;
-
-        // make the sine tracker
-        this.sineCounter = this.tweens.addCounter({
-            from: 1,
-            to: this.VEL_Y,
-            duration: this.SINE_DURATION,
-            ease: 'Sine.easeInOut',
-            repeat: 10,
-            yoyo: true
-        });
-
-        //make the particle emitter
-        const particleManager = this.add.particles('circle');
-
-        // create an emitter
-        this.collectionParticles = particleManager.createEmitter();
-
-        // give the emitter some properties
-        // this.centerEmitter.setPosition(centerX, centerY);
-        // this.centerEmitter.setSpeed(this.SPEED);
-        // this.centerEmitter.setLifespan(500);
-        // this.centerEmitter.frequency = -1;
+        this.middle = 384;
+        this.bottom = 512;
 
         // BGM config
         this.BGMconfig = {
@@ -83,26 +61,63 @@ class Art extends Phaser.Scene {
         console.log('groundMap', groundMap, 'tileset ', tileset, 'worldLayer', worldLayer)
 
         // add collectableItems
-        // generate coin objects from object data
+        // generate item objects from object data
         // .createFromObjects(name, id, spriteConfig [, scene])
+        // make pallets
         this.pallets = groundMap.createFromObjects("collectableItems", "pallet", {
             key: "cItems",
             frame: 0
         }, this);
+        // make brushes
+        this.brushes = groundMap.createFromObjects("collectableItems", "brush", {
+            key: "cItems",
+            frame: 1
+        }, this);
+        // make notes
+        this.notes = groundMap.createFromObjects("collectableItems", "note", {
+            key: "cItems",
+            frame: 2
+        }, this);
+
         // createFromObjects can't add Physics Sprites, so we add physics manually
         // https://photonstorm.github.io/phaser3-docs/Phaser.Physics.Arcade.World.html#enable__anchor
         // second parameter is 0: DYNAMIC_BODY or 1: STATIC_BODY
         this.physics.world.enable(this.pallets, Phaser.Physics.Arcade.STATIC_BODY);
+        this.physics.world.enable(this.brushes, Phaser.Physics.Arcade.STATIC_BODY);
+        this.physics.world.enable(this.notes, Phaser.Physics.Arcade.STATIC_BODY);
+
         // now use JS .map method to set a more accurate circle body on each sprite
         this.pallets.map((pallet) => {
             pallet.body.setCircle(32).setOffset(2, -1);
         });
+        this.brushes.map((brush) => {
+            brush.body.setCircle(32).setOffset(2, -1);
+        });
+        this.notes.map((note) => {
+            note.body.setCircle(32).setOffset(2, -1);
+        });
+
         // then add the items to a group
         this.palletsGroup = this.add.group(this.pallets);
+        this.brushesGroup = this.add.group(this.brushes);
+        this.notesGroup = this.add.group(this.notes);
 
         // set collisions of world and player
         worldLayer.setCollisionByProperty({ collides: true });
         this.physics.world.TILE_BIAS = 39;  // increase to prevent sprite tunneling through tiles
+
+        // add collectable Items
+        this.collectableItem = [new Collectable(this, 1024, this.top, 'starryNight', 0, 10, false),
+            new Collectable(this, 256, this.middle, 'fields', 0, 10, false),
+            new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
+
+        for (let step = 0; step < this.collectableItem.length; step++){
+            this.collectableItem[step].setScrollFactor(0);
+            console.log(this.collectableItem[step])
+        }
+        // this.collectableItem[0].setScrollFactor(0);
+        // this.collectableItem[1].setScrollFactor(0);
+        // this.collectableItem[2].setScrollFactor(0);
 
         // add player to scene
         this.playerOne = new Runner(this, 256, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
@@ -116,10 +131,16 @@ class Art extends Phaser.Scene {
             // sound
             // other events
         });
-
-
-        //make the particle emitter follow the player
-        // this.collectionParticles.startFollow(this.playerOne);
+        this.physics.add.overlap(this.playerOne, this.brushesGroup, (obj1, obj2) => {
+            obj2.destroy(); // remove item on overlap
+            // sound
+            // other events
+        });
+        this.physics.add.overlap(this.playerOne, this.notesGroup, (obj1, obj2) => {
+            obj2.destroy(); // remove item on overlap
+            // sound
+            // other events
+        });
 
         // add player world collider
         this.physics.add.collider(this.playerOne, worldLayer);
@@ -132,27 +153,13 @@ class Art extends Phaser.Scene {
         // this.myKokoro = new Kokoro(this, this.playerOne.x, this.playerOne.y, 'redHeart', 0).setScale(0.5, 0.5).setOrigin(0, 0);
         // this.myKokoro.alpha = 0;
 
-        // add collectable Items
-        this.collectableItem = [new Collectable(this, 192, this.top, 'starryNight', 0, 10, false),
-            new Collectable(this, 96, this.middle, 'fields', 0, 10, false),
-            new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
 
-        for (let step = 0; step < this.collectableItem.length; step++){
-            // this.collectableItem[step].setScrollFactor(0);
-            // console.log(this.collectableItem[step])
-        }
-        this.collectableItem[0].setScrollFactor(0);
-        // this.collectableItem[1].setScrollFactor(0);
-        // this.collectableItem[2].setScrollFactor(0);
-
-
-        // this.collectableItem.setScrollFactor(0);
 
         // add display hearts - normally these are setVisibale to false
         this.displayKokoro = [this.add.sprite(1528, 48, 'bridge').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
             this.add.sprite(1568, 48, 'starryNight').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
-            this.add.sprite(1608, 48, 'redHeart').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
-            this.add.sprite(1648, 48, 'fields').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
+            this.add.sprite(1608, 48, 'fields').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
+            this.add.sprite(1648, 48, 'bridge').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
             this.add.sprite(1688, 48, 'starryNight').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0)];
 
         // graphics debug call - uncomment to use
@@ -166,6 +173,28 @@ class Art extends Phaser.Scene {
             scale: { start: 0.1, end: 1 },
             tint: [0x008080, 0x008B8B, 0x00FFFF, 0xff0000],
         }).startFollow(this.miku, 32, 32); // particle offset from followee
+
+
+        // make the sine tracker
+        this.sineCounter = this.tweens.addCounter({
+            from: 1,
+            to: this.VEL_Y,
+            duration: this.SINE_DURATION,
+            ease: 'Sine.easeInOut',
+            repeat: 10,
+            yoyo: true
+        });
+
+        //make the particle emitter
+        const particleManager = this.add.particles('circle');
+        // create an emitter
+        this.collectionParticles = particleManager.createEmitter();
+        // give the emitter some properties
+        // this.centerEmitter.setPosition(centerX, centerY);
+        // this.centerEmitter.setSpeed(this.SPEED);
+        // this.centerEmitter.setLifespan(500);
+        // this.centerEmitter.frequency = -1;
+
 
         // define control keys
         keyL = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.L);
@@ -252,20 +281,6 @@ class Art extends Phaser.Scene {
             this.playerOne.anims.play('playerWalkAni', true);
         }
 
-
-        // camera zoom testing
-        // this.cameras.main.zoomTo(1.5, 0, 'Sine.easeIn', false).centerOn(this.playerOne.x + 512, this.playerOne.y);
-        // if (this.clock.getElapsedSeconds() > 1) {
-        //     this.cameras.main.zoomTo(1, 2000, 'Sine.easeOut', true);
-        //     this.cameras.main.followOffset.set(-756, 64);
-        //     this.cameras.main.setDeadzone(1024, 1912);
-        // }
-        // this.cameras.main.centerToBounds();
-
-
-
-
-
         // background animation
         this.nightSky.tilePositionX += .5;
 
@@ -300,6 +315,15 @@ class Art extends Phaser.Scene {
         if (this.checkCollision(this.playerOne, this.collectableItem[2])) {
             this.collected(this.collectableItem[2]);
         }
+
+        // camera zoom testing
+        // this.cameras.main.zoomTo(1.5, 0, 'Sine.easeIn', false).centerOn(this.playerOne.x + 512, this.playerOne.y);
+        // if (this.clock.getElapsedSeconds() > 1) {
+        //     this.cameras.main.zoomTo(1, 2000, 'Sine.easeOut', true);
+        //     this.cameras.main.followOffset.set(-756, 64);
+        //     this.cameras.main.setDeadzone(1024, 1912);
+        // }
+        // this.cameras.main.centerToBounds();
 
         // check kokoro playerOne collision
         // if (this.checkCollision(this.playerOne, this.myKokoro)){
@@ -348,7 +372,7 @@ class Art extends Phaser.Scene {
             this.capturedHearts = 0;
         }
         this.sound.play('beem');
-        collectable.reset(); // reset ship position
+        collectable.reset(); // reset position
     }
 
     kokoroMeter(capturedHearts) {
@@ -358,8 +382,8 @@ class Art extends Phaser.Scene {
         }
     }
 
-    kokoroDropped() {
-        console.log('the kokoro has been dropped');
+    kokoroStolen() {
+        console.log('the kokoro has been stolen');
         this.displayKokoro[this.kokoros - 1].setVisible(false);
         this.kokoros -= 1;
         this.capturedHearts -= 10;

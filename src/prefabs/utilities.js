@@ -27,29 +27,9 @@ class utilities {
         }
     }
 
-    // evasive pattern for flying collectables
-    // crissCross(collectable) {
-    //     if (collectable.direction) {
-    //         // make collectable go up - later this could be a function
-    //         collectable.y -= .5;
-    //         if (collectable.y <= this.top) {
-    //             collectable.direction = false;
-    //         }
-    //         return;
-    //
-    //     } else if (!collectable.direction) {
-    //         // make collectable go down - later this could be a function
-    //         collectable.y += .5;
-    //         if (collectable.y >= this.bottom) {
-    //             collectable.direction = true;
-    //         }
-    //         return;
-    //     }
-    // }
-
     crissCross(collectable) { // special thanks to Darcy for helping me with this one!!!
-        // divide x by bigger number to slow, * by to change distance traveled
-        collectable.y = (Math.sin(collectable.x/200) * 256) ;
+        // divide x by bigger number to slow, * by to change distance traveled + for center line
+        collectable.y = (Math.sin(collectable.x/256) * 256) + 256 ;
     }
 
     // debug scene change keys
