@@ -29,13 +29,14 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
             frameRate: 6,
         });
 
-
+        this.body.checkCollision.left = false;
     }
 
     update() {
-
+        console.log('thief y ');
         this.running();
         this.moveForward();
+        this.unTunnel();
 
         if (Phaser.Input.Keyboard.JustDown(keyUP)) {
             this.jump();
@@ -47,6 +48,13 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
 
     reset() {
 
+    }
+
+    unTunnel(){
+        if (this.y >= 800){
+            this.y = 799;
+
+        }
     }
 
     moveForward() { // this allows the runner to not run into platforms during a jump

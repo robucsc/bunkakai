@@ -111,14 +111,6 @@ class Art extends Phaser.Scene {
             new Collectable(this, 256, this.middle, 'fields', 0, 10, false),
             new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
 
-        for (let step = 0; step < this.collectableItem.length; step++){
-            this.collectableItem[step].setScrollFactor(0);
-            console.log(this.collectableItem[step])
-        }
-        // this.collectableItem[0].setScrollFactor(0);
-        // this.collectableItem[1].setScrollFactor(0);
-        // this.collectableItem[2].setScrollFactor(0);
-
         // add player to scene
         this.playerOne = new Runner(this, 256, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
 
@@ -149,11 +141,6 @@ class Art extends Phaser.Scene {
         // start character animation
         this.playerOne.anims.play('playerWalkAni');
         this.foeOne.anims.play('antagonistWalkAni');
-
-        // add kokoro
-        // this.myKokoro = new Kokoro(this, this.playerOne.x, this.playerOne.y, 'redHeart', 0).setScale(0.5, 0.5).setOrigin(0, 0);
-        // this.myKokoro.alpha = 0;
-
 
 
         // add display hearts - normally these are setVisibale to false
@@ -261,14 +248,6 @@ class Art extends Phaser.Scene {
             this.time.removeAllEvents();
             this.scene.start("menuScene");
         }
-
-        // if (!this.playerOne.body.velocity.x >= 0){
-        //     // this.cameras.main.setDeadzone(632, 1536); // for going to the left
-        //     console.log("> 0 ", this.playerOne.body.velocity.x);
-        // } else {
-        //     this.cameras.main.setDeadzone(1280, 1536); // for going to the right
-        //     console.log("< 0 ", this.playerOne.body.velocity.x);
-        // }
 
         // update player
         this.playerOne.update();
