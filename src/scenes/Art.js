@@ -48,8 +48,12 @@ class Art extends Phaser.Scene {
         }
 
         // place background images
-        this.nightSky = this.add.tileSprite(0, 0, 1912, 1024, 'nightSky').setOrigin(0, 0).setVisible(true);
+        this.nightSky = this.add.tileSprite(0, -128, 1912, 1024, 'nightSky').setOrigin(0, 0).setVisible(true);
         this.nightSky.setScrollFactor(0);
+        this.nightSky.alpha = 0;
+        this.day = this.add.tileSprite(0, -128, 1912, 1024, 'day').setOrigin(0, 0).setVisible(true);
+        this.day.setScrollFactor(0);
+
         var theScoreFrame = this.add.sprite(64, 46, 'scoreFrame').setScale(1.5, 1).setOrigin(0, 0); // scoreFrame desu
         theScoreFrame.setScrollFactor(0);
 
@@ -276,6 +280,7 @@ class Art extends Phaser.Scene {
 
         // background animation
         this.nightSky.tilePositionX += .5;
+        this.day.tilePositionX += .5;
 
         // update collectables
         if (!this.gameOver) {

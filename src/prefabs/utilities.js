@@ -20,9 +20,9 @@ class utilities {
     changeTheSky(){
         if (this.scene.clock.getElapsedSeconds() > 10 && this.scene.clock.getElapsedSeconds() < 40) {
             this.scene.nightSky.alpha = 1;
-            this.scene.sky.alpha -= .001;
+            this.scene.day.alpha -= .001;
         } else {
-            this.scene.sky.alpha += .001;
+            this.scene.day.alpha += .001;
             this.scene.nightSky.alpha -= .005;
         }
     }

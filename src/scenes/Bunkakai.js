@@ -5,14 +5,14 @@ class Bunkakai extends Phaser.Scene{
             pack: {
                 files: [
                     { type: 'image', key: 'gameTitleImage', url: './assets/bunkakaiText.png' },
-                    { type: 'image', key: 'background', url: './assets/daySeamless.jpg' }
+                    { type: 'image', key: 'day', url: './assets/daySeamless.jpg' }
                 ]
             }});
     }
 
     preload(){
         this.cameras.main.fadeIn(500, 0, 0, 0)
-        this.add.image(0,0,"background").setOrigin(0);
+        this.add.image(0,0,"day").setOrigin(0);
         this.add.image(0,0,"gameTitleImage").setOrigin(0);
 
         var progressBar = this.add.graphics();
