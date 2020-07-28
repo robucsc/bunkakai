@@ -282,6 +282,9 @@ class Art extends Phaser.Scene {
         this.nightSky.tilePositionX += .5;
         this.day.tilePositionX += .5;
 
+        // crossfade the sky images
+        this.utilities.changeTheSky();
+
         // update collectables
         if (!this.gameOver) {
             // this.myKokoro.update();
