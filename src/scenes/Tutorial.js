@@ -25,7 +25,8 @@ class Tutorial extends Phaser.Scene{
         keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.X);
 
 
-
+        this.sky = this.add.tileSprite(0, 0, 1912, 1024, 'sky').setOrigin(0, 0).setVisible(true);
+        this.add.tileSprite(0, 0, 1912, 1024, 'tutorialText').setOrigin(0, 0);
 
         // add player to scene
         this.playerOne = new Runner(this, 832, 288, 'playerRun', 0, 30, false).setScale(1.5, 1.5).setOrigin(0, 0);
@@ -52,7 +53,7 @@ class Tutorial extends Phaser.Scene{
     }
 
     update(){
-        // this.sky.tilePositionX += .5;
+        this.sky.tilePositionX += .5;
          // debug scene change call
         this.utilities.sceneChange();
 
