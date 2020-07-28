@@ -251,6 +251,7 @@ class Art extends Phaser.Scene {
 
         // update player
         this.playerOne.update();
+        this.foeOne.update();
 
         // debug scene change call
         this.utilities.sceneChange();

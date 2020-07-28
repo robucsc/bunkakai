@@ -5,7 +5,7 @@ class Bunkakai extends Phaser.Scene{
             pack: {
                 files: [
                     { type: 'image', key: 'gameTitleImage', url: './assets/bunkakaiText.png' },
-                    { type: 'image', key: 'background', url: './assets/day.jpg' }
+                    { type: 'image', key: 'background', url: './assets/daySeamless.jpg' }
                 ]
             }});
     }

@@ -33,7 +33,7 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
     }
 
     update() {
-        console.log('thief y ');
+        console.log('thief y ', this.y);
         this.running();
         this.moveForward();
         this.unTunnel();
@@ -51,8 +51,8 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
     }
 
     unTunnel(){
-        if (this.y >= 800){
-            this.y = 799;
+        if (this.y > 764){
+            this.y = 760;
 
         }
     }
