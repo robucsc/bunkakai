@@ -29,7 +29,7 @@ class utilities {
 
     crissCross(collectable) { // special thanks to Darcy for helping me with this one!!!
         // divide x by bigger number to slow, * by to change distance traveled + for center line
-        collectable.y = (Math.sin(collectable.x/256) * 256) + 256 ;
+        collectable.y = (Math.sin(collectable.x/320) * 256) + 256;
     }
 
     // debug scene change keys
@@ -79,15 +79,15 @@ class utilities {
         });
     }
 
-// mutes all audio including music and sound effects
+    // mutes all audio including music and sound effects
     muteAudio() { // found info for this on https://gist.github.com/zackproser/1aa1ee41f326fc00dfb4
-        // if (Phaser.Input.Keyboard.JustDown(keyX)) {
-        //     if (!this.game.sound.mute) {
-        //         this.game.sound.mute = true;
-        //     } else {
-        //         this.game.sound = false;
-        //     }
-        // }
+        if (Phaser.Input.Keyboard.JustDown(keyX)) {
+            if (!this.game.sound.mute) {
+                this.game.sound.mute = true;
+            } else {
+                this.game.sound = false;
+            }
+        }
     }
 
 }

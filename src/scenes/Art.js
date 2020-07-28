@@ -50,8 +50,8 @@ class Art extends Phaser.Scene {
         // place background images
         this.nightSky = this.add.tileSprite(0, 0, 1912, 1024, 'nightSky').setOrigin(0, 0).setVisible(true);
         this.nightSky.setScrollFactor(0);
-        var moon = this.add.sprite(48, 32, 'moon').setScale(1, 1).setOrigin(0, 0); // moon desu
-        moon.setScrollFactor(0);
+        var theScoreFrame = this.add.sprite(64, 46, 'scoreFrame').setScale(1.5, 1).setOrigin(0, 0); // scoreFrame desu
+        theScoreFrame.setScrollFactor(0);
 
         // tile sets, maps, and collisions
         const groundMap = this.add.tilemap('grassLayerMap');
@@ -216,8 +216,8 @@ class Art extends Phaser.Scene {
         // score display
         let scoreConfig = {
             fontFamily: 'Courier',
-            fontSize: '28px',
-            backgroundColor: '#f00',
+            fontSize: '32px',
+            // backgroundColor: '#f00',
             color: '#000',
             align: 'right',
             padding: {
@@ -261,6 +261,14 @@ class Art extends Phaser.Scene {
             this.scene.start("menuScene");
         }
 
+        // if (!this.playerOne.body.velocity.x >= 0){
+        //     // this.cameras.main.setDeadzone(632, 1536); // for going to the left
+        //     console.log("> 0 ", this.playerOne.body.velocity.x);
+        // } else {
+        //     this.cameras.main.setDeadzone(1280, 1536); // for going to the right
+        //     console.log("< 0 ", this.playerOne.body.velocity.x);
+        // }
+
         // update player
         this.playerOne.update();
 
@@ -268,6 +276,7 @@ class Art extends Phaser.Scene {
         this.utilities.sceneChange();
 
         // global audio mute
+        // this.utilities.muteAudio();
         this.muteAudio();
 
         if (this.playerOne.body.velocity.y != 0){
@@ -394,12 +403,13 @@ class Art extends Phaser.Scene {
     
     
     muteAudio(){ // found info for this on https://gist.github.com/zackproser/1aa1ee41f326fc00dfb4
-        // if (Phaser.Input.Keyboard.JustDown(keyX)) {
-        //     if (!this.game.sound.mute) {
-        //         this.game.sound.mute = true;
-        //     } else {
-        //         this.game.sound = false;
-        //     }
-        // }
+        if (Phaser.Input.Keyboard.JustDown(keyX)) {
+            console.log("did it mute?")
+            if (!this.game.sound.mute) {
+                this.game.sound.mute = true;
+            } else {
+                this.game.sound = false;
+            }
+        }
     }
 }

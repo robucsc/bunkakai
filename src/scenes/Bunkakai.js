@@ -56,7 +56,7 @@ class Bunkakai extends Phaser.Scene{
         this.load.image('hills', './assets/hills.png');
         this.load.image('sky', './assets/sky.png');
         this.load.image('nightSky', './assets/starryBackground.jpg');
-        this.load.image('moon', './assets/moon.png');
+        this.load.image('scoreFrame', './assets/scoreFrame.png');
         this.load.image('tutorialText', './assets/tutorialText.png');
 
         // particle images
