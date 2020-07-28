@@ -150,6 +150,7 @@ class Art extends Phaser.Scene {
         this.physics.add.overlap(this.playerOne, this.palletsGroup, (obj1, obj2) => {
             obj2.destroy(); // remove item on overlap
             // sound
+            this.sound.play('yeah');
             // other events
             console.log('pallet points ', this.collectableItemPoints)
             this.playerOneScore += this.collectableItemPoints;
@@ -158,6 +159,7 @@ class Art extends Phaser.Scene {
         this.physics.add.overlap(this.playerOne, this.brushesGroup, (obj1, obj2) => {
             obj2.destroy(); // remove item on overlap
             // sound
+            this.sound.play('yeah');
             // other events
             console.log('brush points ', this.collectableItemPoints)
             this.playerOneScore += (this.collectableItemPoints * 2);
@@ -166,6 +168,7 @@ class Art extends Phaser.Scene {
         this.physics.add.overlap(this.playerOne, this.notesGroup, (obj1, obj2) => {
             obj2.destroy(); // remove item on overlap
             // sound
+            this.sound.play('yeah');
             // other events
             console.log('note points ', this.collectableItemPoints)
             this.playerOneScore += (this.collectableItemPoints * 3);
@@ -176,13 +179,9 @@ class Art extends Phaser.Scene {
         this.physics.add.collider(this.playerOne, worldLayer);
         this.physics.add.collider(this.foeOne, worldLayer);
 
-        // add player and antagonist collider
-        // this.physics.add.collider(this.player, this.foe, this.kokoroStolen, null, this);
-
         // start character animation
         this.playerOne.anims.play('playerWalkAni');
         this.foeOne.anims.play('antagonistWalkAni');
-
 
         // add display hearts - normally these are setVisibale to false
         this.displayKokoro = [this.add.sprite(1528, 48, 'bridge').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
@@ -275,6 +274,8 @@ class Art extends Phaser.Scene {
         // update player
         this.playerOne.update();
         this.foeOne.update();
+        this.kokoroStolen();
+
 
         // debug scene change call
         this.utilities.sceneChange();
@@ -394,12 +395,15 @@ class Art extends Phaser.Scene {
     }
 
     kokoroStolen() {
-        console.log('the kokoro has been stolen');
-        this.displayKokoro[this.kokoros - 1].setVisible(false);
-        this.kokoros -= 1;
-        this.capturedHearts -= 5;
-        if (this.capturedHearts < 0) {
-            this.capturedHearts = 0;
+        if (this.checkCollision(this.playerOne, this.foeOne)) {
+            console.log('the kokoro has been stolen');
+            // this.displayKokoro[this.kokoros - 1].setVisible(false);
+            this.kokoros -= 1;
+            this.capturedHearts -= 5;
+            if (this.capturedHearts < 0) {
+                this.capturedHearts = 0;
+            }
+            this.sound.play('ohno');
         }
     }
 

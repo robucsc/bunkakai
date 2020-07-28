@@ -43,8 +43,8 @@ class Bunkakai extends Phaser.Scene{
         this.load.audio('sfx_select', './assets/iPhoneCameraSound.mp3');
         this.load.audio('sfx_explosion', './assets/sagoi.wav');
         this.load.audio('sagoi', './assets/sagoi.wav');
-        this.load.audio('sfx_rocket', './assets/yeah.wav');
-        this.load.audio('beem', './assets/yeah.wav');
+        this.load.audio('yeah', './assets/yeah.wav');
+        this.load.audio('beem', './assets/beem.wav');
         this.load.audio('artbgm', './assets/artbgm.ogg');
         this.load.audio('fashionbgm', './assets/bunkakaiFashionGroove.mp3');
         this.load.audio('musicbgm', './assets/bunkakaiFashionGroove.mp3');
