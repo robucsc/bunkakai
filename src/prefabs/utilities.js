@@ -18,12 +18,12 @@ class utilities {
 
     // crossfade the sky images
     changeTheSky(){
-        if (this.scene.clock.getElapsedSeconds() > 10 && this.scene.clock.getElapsedSeconds() < 40) {
+        if (this.scene.clock.getElapsedSeconds() > 30 && this.scene.clock.getElapsedSeconds() < 60) {
             this.scene.nightSky.alpha = 1;
             this.scene.day.alpha -= .001;
         } else {
             this.scene.day.alpha += .001;
-            this.scene.nightSky.alpha -= .005;
+            // this.scene.nightSky.alpha -= .005;
         }
     }
 
