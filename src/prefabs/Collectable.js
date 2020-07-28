@@ -17,7 +17,8 @@ class Collectable extends Phaser.Physics.Arcade.Sprite{
     }
     update(){
         // move Collectable right
-        this.x -= game.settings.spaceshipSpeed;
+        // this.x -= game.settings.spaceshipSpeed;
+        this.x -= 6;
         // wraparound from right to left edge
         if (this.x <= 0 - this.width){
             this.reset();

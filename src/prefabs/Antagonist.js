@@ -33,17 +33,8 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
     }
 
     update() {
-        console.log('thief y ', this.y);
-        this.running();
         this.moveForward();
         this.unTunnel();
-
-        if (Phaser.Input.Keyboard.JustDown(keyUP)) {
-            this.jump();
-        }
-
-        this.levelFinish();
-
     }
 
     reset() {
@@ -51,62 +42,12 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
     }
 
     unTunnel(){
-        if (this.y > 764){
-            this.y = 760;
-
+        if (this.y >= 764){
+            this.y = 764;
         }
     }
 
     moveForward() { // this allows the runner to not run into platforms during a jump
         this.body.checkCollision.left = false;
-
-        // if (this.body.velocity.y != 0) {
-        //
-        // } else {
-        //     this.body.checkCollision.right = true;
-        // }
-
     }
-
-    running(){
-        // let keyDown = Phaser.Input.Keyboard.JustDown(keyRIGHT); // because justDown can only be called once per loop
-        //
-        // if (keyDown && this.body.onWall()) {
-        //     console.log('miniJump ', this.body.velocity.y);
-        //     this.setVelocityY(this.scene.miniJumpVelocity);
-        // } else if (keyDown){
-        //     this.setVelocityX(this.scene.runnerVelocityX);
-        // }
-        //
-        // if (Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-        //     this.setVelocityX(-this.scene.runnerVelocityX);
-        // }
-
-    }
-
-    // this.body.blocked().right
-
-    jump() {
-        // make runner go up
-        // if (this.body.velocity.y == 0) { // the main jump code
-        //     console.log('jump one ', this.body.velocity.y)
-        //     this.setVelocityY(this.scene.jumpVelocity);
-        //     this.doubleJump = true;
-        //
-        // } else if (this.doubleJump) { // a second press gives a boost jump
-        //     console.log('jump two ', this.body.velocity.y)
-        //     this.setVelocityY(this.scene.doublejumpVelocity);
-        //     this.doubleJump = false;
-        // }
-    }
-
-    levelFinish(){
-        // if (this.x >= this.scene.pixelLength) { // stop the runner at level end
-        //     this.setAccelerationX(0);
-        //     this.setVelocityX(0);
-        // }
-        // victory dance
-
-    }
-
 }
