@@ -46,7 +46,7 @@ class Tutorial extends Phaser.Scene{
         // BGM play, this was really tricky Big thanks to Ben and Darcy!
         if (this.sound.get('artbgm') == null) { // check to see if it exists
             this.BGMmusic = this.sound.add('artbgm', this.BGMconfig); // add music
-            // this.BGMmusic.play(this.BGMconfig); // play music
+            this.BGMmusic.play(this.BGMconfig); // play music
         }
 
     }
