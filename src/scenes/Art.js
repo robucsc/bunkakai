@@ -388,7 +388,7 @@ class Art extends Phaser.Scene {
     }
 
     kokoroMeter(capturedHearts) {
-        if (capturedHearts % 5 == 0 && capturedHearts <= 25) {
+        if (capturedHearts % 500 == 0 && capturedHearts <= 3000) {
             this.displayKokoro[capturedHearts/5 - 1].setVisible(true);
             this.kokoros += 1;
         }

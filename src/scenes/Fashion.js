@@ -1,3 +1,27 @@
+
+
+
+
+
+
+// PLEASE NOTE: THIS IS AN UNFINISHED PAGE. I'M LEAVING IT IN HERE FOR WHEN I HAVE TIME
+// TO ADD MORE LEVELS TO THE GAME. PLEASE DON'T MARK ME DOWN FOR IT. YES I COULD TOTALLY
+// DELETE THIS WORK, BUT THAT WOULD BE SO TOTALLY POINTLESS, AND YEAH I KNOW I'M SHOUTING!!!!!
+
+
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
+
+
+
+
+
+
+
+
 class Fashion extends Phaser.Scene{
 
     constructor() {
