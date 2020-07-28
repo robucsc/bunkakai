@@ -12,6 +12,7 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
         this.MAX_Y_VEL = 1500;
         this.DRAG = 600;
         this.JUMP_VELOCITY = -650;
+        this.finishedLevel = false;
 
         this.body.setMaxVelocity(this.MAX_X_VEL, this.MAX_Y_VEL);
         // this.setAccelerationX(this.scene.runnerAccelerationX);
@@ -53,7 +54,6 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
     }
 
     update() {
-
         this.running();
         this.moveForward();
         this.directionChange();
@@ -118,7 +118,7 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
 
     unTunnel(){
         if (this.y >= 821){
-            this.y = 380;
+            this.y = 256;
             this.x -= 64;
             this.body.velocity.x = -200;
             this.body.velocity.y-200;
@@ -130,9 +130,13 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
         if (this.x >= this.scene.pixelLength) { // stop the runner at level end
             this.setAccelerationX(0);
             this.setVelocityX(0);
+            if (!this.finishedLevel) {
+                this.finishedLevel = true;
+                this.scene.sound.play('sagoi');
+                this.scene.dialogBox.visible = true;
+            }
         }
-        // victory dance
+
 
     }
-
 }

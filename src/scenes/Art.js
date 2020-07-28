@@ -57,7 +57,7 @@ class Art extends Phaser.Scene {
         this.nightSky.alpha = 1;
         this.day = this.add.tileSprite(0, 0, 1912, 1024, 'day').setOrigin(0, 0).setVisible(true);
         this.day.setScrollFactor(0);
-        this.dialogBox = this.add.tileSprite(15404, -32, 259, 308, 'dialogBox').setOrigin(0, 0).setVisible(true);
+        this.dialogBox = this.add.tileSprite(15404, -32, 259, 308, 'dialogBox').setOrigin(0, 0).setVisible(false);
         // score
         var theScoreFrame = this.add.sprite(64, 46, 'scoreFrame').setScale(1.5, 1).setOrigin(0, 0); // scoreFrame desu
         theScoreFrame.setScrollFactor(0);
@@ -144,7 +144,7 @@ class Art extends Phaser.Scene {
         this.playerOne = new Runner(this, 576, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
 
         // add antagonist to the scene
-        this.foeOne = new Antagonist(this, 1024, 512, 'antagonistWalk', 0, 10, true).setScale(.75, .75).setOrigin(0,0);
+        this.foeOne = new Antagonist(this, 1024, 512, 'antagonistWalk', 0, 10, true).setScale(.75, .75).setOrigin(0,0).setVisible(false);
 
         // create collider for playerOne and collectableItems
         this.physics.add.overlap(this.playerOne, this.palletsGroup, (obj1, obj2) => {
@@ -238,19 +238,8 @@ class Art extends Phaser.Scene {
         keyT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T); // tutorial
         keyX = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.T); // mute audio
 
-
-
         // game over flag
         this.gameOver = false;
-
-        // play clock
-        this.moreTime = 0;
-        scoreConfig.fixedWidth = 0;
-        this.clock = this.time.delayedCall(game.settings.gameTimer + this.moreTime, () => {
-            this.add.text(game.config.width / 2, game.config.height / 2, 'おわい!', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width / 2, game.config.height / 2 + 64, '(L)ove to Play or ← for Menu', scoreConfig).setOrigin(0.5);
-            this.gameOver = true;
-        }, null, this);
 
         // Camera
         this.cameras.main.startFollow(this.playerOne);
@@ -258,6 +247,12 @@ class Art extends Phaser.Scene {
         this.cameras.main.setDeadzone(640, 1536); //
         this.cameras.main.fadeIn(1500, 0, 0, 0)
         // console.log(this.cameras); // for debugging - uncomment to use
+
+        // play clock
+        scoreConfig.fixedWidth = 0;
+        this.clock = this.time.delayedCall(game.settings.gameTimer + this.moreTime, () => {
+            this.gameOver = true;
+        }, null, this);
     }
 
     update() { // ideally every frame
@@ -276,13 +271,12 @@ class Art extends Phaser.Scene {
         this.foeOne.update();
         this.kokoroStolen();
 
-
         // debug scene change call
         this.utilities.sceneChange();
 
-        // global audio mute
+        // global audio mute - commented out because I couldn't get it to work yet. Will be implemented in a
+        // future update. The code is very close, so I've left it in.
         // this.utilities.muteAudio();
-        this.muteAudio();
 
         if (this.playerOne.body.velocity.y != 0){
             this.playerOne.anims.play('playerJumpAni', true);
@@ -328,7 +322,8 @@ class Art extends Phaser.Scene {
             this.collected(this.collectableItem[2]);
         }
 
-        // camera zoom testing
+        // camera zoom testing - This is commented out, but left in because after I get some sleep
+        // I intend to get it working.
         // this.cameras.main.zoomTo(1.5, 0, 'Sine.easeIn', false).centerOn(this.playerOne.x + 512, this.playerOne.y);
         // if (this.clock.getElapsedSeconds() > 1) {
         //     this.cameras.main.zoomTo(1, 2000, 'Sine.easeOut', true);
@@ -337,12 +332,6 @@ class Art extends Phaser.Scene {
         // }
         // this.cameras.main.centerToBounds();
 
-        // check kokoro playerOne collision
-        // if (this.checkCollision(this.playerOne, this.myKokoro)){
-        //     console.log('playerOne Loved');
-        //     this.myKokoro.reset();
-        //     this.letsExplode(this.playerOne);
-        // }
     }
 
     checkCollision(objectOne, objectTwo) {
@@ -355,21 +344,6 @@ class Art extends Phaser.Scene {
         } else {
             return false;
         }
-    }
-
-    letsExplode(collectable) {
-        // collectable.alpha = 0;                             // temporarily hid ship
-        // create explosion sprite at ship's position
-        this.boom = this.add.sprite(collectable.x, collectable.y, 'explosion').setOrigin(0, 0);
-        this.boom.anims.play('explode');            // play explode animation
-        this.boom.on('animationcomplete', () => {   // callback after animation completes
-            // collectable.reset();                           // reset ship position
-            // collectable.alpha = 1;                         // make ship visible again
-            this.boom.destroy();                    // remove explosion sprite
-        });
-        this.playerOneScore += collectable.points;
-        this.scoreLeft.text = this.playerOneScore;
-        this.sound.play('sfx_explosion');
     }
 
     collected(collectable) {
@@ -407,15 +381,4 @@ class Art extends Phaser.Scene {
         }
     }
 
-    
-    muteAudio(){ // found info for this on https://gist.github.com/zackproser/1aa1ee41f326fc00dfb4
-        if (Phaser.Input.Keyboard.JustDown(keyX)) {
-            console.log("did it mute?")
-            if (!this.game.sound.mute) {
-                this.game.sound.mute = true;
-            } else {
-                this.game.sound = false;
-            }
-        }
-    }
 }
