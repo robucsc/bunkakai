@@ -120,7 +120,8 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
 
     unTunnel(){
         if (this.y >= 821){
-            this.y = 512;
+            this.y = 380;
+            this.x -= 64;
             this.body.velocity.x = -200;
             this.body.velocity.y-200;
         }
