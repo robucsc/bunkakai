@@ -20,8 +20,8 @@ Debug Controls
 
     There are a number of keys to get to different parts of the game:
     A for the Art scene
-    F for the Fashion scene
-    M for the Music scene
+    F for the Fashion scene - future implementation
+    M for the Music scene - future implementation
     T for the Tutorial scene
     X to mute the audio (may not be fully implemented yet)
   
