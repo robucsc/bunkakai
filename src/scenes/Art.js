@@ -140,9 +140,9 @@ class Art extends Phaser.Scene {
         this.physics.world.TILE_BIAS = 39;  // increase to prevent sprite tunneling through tiles
 
         // add collectable Items
-        this.collectableItem = [new Collectable(this, 1024, this.top, 'starryNight', 0, 10, false),
-            new Collectable(this, 256, this.middle, 'fields', 0, 10, false),
-            new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
+        this.collectableItem = [new Collectable(this, 11024, this.top, 'starryNight', 0, 1000, false),
+            new Collectable(this, 10256, this.middle, 'fields', 0, 100, false),
+            new Collectable(this, 10000, this.bottom, 'bridge', 0, 100, false)];
 
         // add player to scene 576
         this.playerOne = new Runner(this, 576, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
@@ -309,7 +309,7 @@ class Art extends Phaser.Scene {
         }
 
         // crissCross - evasive pattern for collectables
-        if (this.clock.getElapsedSeconds() > 5) {
+        if (this.clock.getElapsedSeconds() > 0) {
             this.utilities.crissCross(this.collectableItem[0]);
             this.utilities.crissCross(this.collectableItem[1]);
             this.utilities.crissCross(this.collectableItem[2]);
@@ -351,7 +351,7 @@ class Art extends Phaser.Scene {
     }
 
     collected(collectable) {
-        // collectable.alpha = 0;
+        collectable.alpha = 0;
         this.playerOneScore += collectable.points;
         this.scoreLeft.text = this.playerOneScore;
         // this.centerEmitter.explode(23);
@@ -362,11 +362,11 @@ class Art extends Phaser.Scene {
             this.capturedHearts = 0;
         }
         this.sound.play('beem');
-        // collectable.reset(); // reset position
+        collectable.reset(); // reset position
     }
 
     kokoroMeter(capturedHearts) {
-        if (capturedHearts % 500 == 0 && capturedHearts <= 3000) {
+        if (capturedHearts % 5 == 0 && capturedHearts <= 25) {
             this.displayKokoro[capturedHearts/5 - 1].setVisible(true);
             this.kokoros += 1;
         }
