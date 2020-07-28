@@ -134,14 +134,14 @@ class Art extends Phaser.Scene {
 
         // add collectable Items
         this.collectableItem = [new Collectable(this, 192, this.top, 'starryNight', 0, 10, false),
-            new Collectable(this, 96, this.middle, 'fields', 0, 10, false).setScale(2, 2).setOrigin(0, 0).body.setAllowGravity(false),
-            new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false).setScale(2, 2).setOrigin(0, 0).body.setAllowGravity(false)];
+            new Collectable(this, 96, this.middle, 'fields', 0, 10, false),
+            new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
 
         for (let step = 0; step < this.collectableItem.length; step++){
             // this.collectableItem[step].setScrollFactor(0);
             // console.log(this.collectableItem[step])
         }
-        // this.collectableItem[0].setScrollFactor(0);
+        this.collectableItem[0].setScrollFactor(0);
         // this.collectableItem[1].setScrollFactor(0);
         // this.collectableItem[2].setScrollFactor(0);
 
@@ -150,10 +150,10 @@ class Art extends Phaser.Scene {
 
         // add display hearts - normally these are setVisibale to false
         this.displayKokoro = [this.add.sprite(1528, 48, 'bridge').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
-            this.add.sprite(1568, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
-            this.add.sprite(1608, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
-            this.add.sprite(1648, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
-            this.add.sprite(1688, 48, 'redHeart').setScale(0.75, 0.75).setOrigin(0, 0).setVisible(false).setScrollFactor(0)];
+            this.add.sprite(1568, 48, 'starryNight').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
+            this.add.sprite(1608, 48, 'redHeart').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
+            this.add.sprite(1648, 48, 'fields').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0),
+            this.add.sprite(1688, 48, 'starryNight').setScale(1, 1).setOrigin(0, 0).setVisible(false).setScrollFactor(0)];
 
         // graphics debug call - uncomment to use
         // this.utilities.graphicsDebug();
@@ -218,7 +218,7 @@ class Art extends Phaser.Scene {
         this.cameras.main.followOffset.set(-700, 0);
         this.cameras.main.setDeadzone(1280, 1536);
         this.cameras.main.fadeIn(1500, 0, 0, 0)
-        // console.log(this.cameras);
+        // console.log(this.cameras); // for debugging - uncomment to use
     }
 
     update() { // ideally every frame
