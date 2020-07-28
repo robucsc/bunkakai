@@ -29,7 +29,7 @@ class utilities {
 
     crissCross(collectable) { // special thanks to Darcy for helping me with this one!!!
         // divide x by bigger number to slow, * by to change distance traveled + for center line
-        collectable.y = (Math.sin(collectable.x/320) * 256) + 256;
+        collectable.y = (Math.sin(collectable.x/320) * 256) + 320;
     }
 
     // debug scene change keys

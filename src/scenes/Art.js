@@ -112,7 +112,7 @@ class Art extends Phaser.Scene {
             new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
 
         // add player to scene
-        this.playerOne = new Runner(this, 256, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
+        this.playerOne = new Runner(this, 576, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
 
         // add antagonist to the scene
         this.foeOne = new Antagonist(this, 1024, 512, 'antagonistWalk', 0, 10, true).setScale(.75, .75).setOrigin(0,0);
@@ -137,6 +137,9 @@ class Art extends Phaser.Scene {
         // add player world collider
         this.physics.add.collider(this.playerOne, worldLayer);
         this.physics.add.collider(this.foeOne, worldLayer);
+
+        // add player and antagonist collider
+        // this.physics.add.collider(this.player, this.foe, this.kokoroStolen, null, this);
 
         // start character animation
         this.playerOne.anims.play('playerWalkAni');
@@ -232,8 +235,8 @@ class Art extends Phaser.Scene {
 
         // Camera
         this.cameras.main.startFollow(this.playerOne);
-        this.cameras.main.followOffset.set(-700, 0);
-        this.cameras.main.setDeadzone(1280, 1536);
+        this.cameras.main.followOffset.set(-448, 0); //700, 1280
+        this.cameras.main.setDeadzone(640, 1536); // yes I know this is wonky, I just couldn't get it to function correctly
         this.cameras.main.fadeIn(1500, 0, 0, 0)
         // console.log(this.cameras); // for debugging - uncomment to use
     }
@@ -281,19 +284,13 @@ class Art extends Phaser.Scene {
             this.collectableItem[1].update();
             this.collectableItem[2].update();
         }
-        // this.clock.getElapsedSeconds() > 5
+
         // crissCross - evasive pattern for collectables
-        if (true) {
+        if (this.clock.getElapsedSeconds() > 5) {
             this.utilities.crissCross(this.collectableItem[0]);
             this.utilities.crissCross(this.collectableItem[1]);
             this.utilities.crissCross(this.collectableItem[2]);
         }
-
-
-        // Love ani movement
-        // if (this.boom){ // explosion movement
-        //     this.boom.x -= game.settings.spaceshipSpeed - 3;
-        // }
 
         // check heart collection
         if (this.checkCollision(this.playerOne, this.collectableItem[0])) {
@@ -381,7 +378,7 @@ class Art extends Phaser.Scene {
             this.capturedHearts = 0;
         }
     }
-    
+
     
     muteAudio(){ // found info for this on https://gist.github.com/zackproser/1aa1ee41f326fc00dfb4
         if (Phaser.Input.Keyboard.JustDown(keyX)) {
