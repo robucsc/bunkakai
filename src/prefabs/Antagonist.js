@@ -26,7 +26,7 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
             key: 'antagonistWalkAni',
             frames: this.scene.anims.generateFrameNumbers('antagonistWalk', {start: 0, end: 3, first: 0}),
             repeat: -1,
-            frameRate: 15
+            frameRate: 6,
         });
 
 
@@ -50,11 +50,13 @@ class Antagonist extends Phaser.Physics.Arcade.Sprite{
     }
 
     moveForward() { // this allows the runner to not run into platforms during a jump
-        if (this.body.velocity.y != 0) {
-            this.body.checkCollision.right = false;
-        } else {
-            this.body.checkCollision.right = true;
-        }
+        this.body.checkCollision.left = false;
+
+        // if (this.body.velocity.y != 0) {
+        //
+        // } else {
+        //     this.body.checkCollision.right = true;
+        // }
 
     }
 
