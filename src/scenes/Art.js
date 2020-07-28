@@ -57,7 +57,7 @@ class Art extends Phaser.Scene {
         this.nightSky.alpha = 1;
         this.day = this.add.tileSprite(0, 0, 1912, 1024, 'day').setOrigin(0, 0).setVisible(true);
         this.day.setScrollFactor(0);
-
+        this.dialogBox = this.add.tileSprite(15404, -32, 259, 308, 'dialogBox').setOrigin(0, 0).setVisible(true);
         // score
         var theScoreFrame = this.add.sprite(64, 46, 'scoreFrame').setScale(1.5, 1).setOrigin(0, 0); // scoreFrame desu
         theScoreFrame.setScrollFactor(0);
@@ -141,8 +141,8 @@ class Art extends Phaser.Scene {
             new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
 
         // add player to scene
-        this.playerOne = new Runner(this, 576, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
-
+        this.playerOne = new Runner(this, 15000, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
+        // x 576
         // add antagonist to the scene
         this.foeOne = new Antagonist(this, 1024, 512, 'antagonistWalk', 0, 10, true).setScale(.75, .75).setOrigin(0,0);
 

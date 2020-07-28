@@ -40,7 +40,7 @@ class utilities {
             if (this.scene.sound.get('artbgm') == null) {
                 this.scene.BGMmusic.mute = true;
             }
-            this.scene.sound.play('sfx_select');
+            this.scene.sound.play('yeah');
             this.scene.scene.start("artScene");
         }
         if (Phaser.Input.Keyboard.JustDown(keyF)) {
@@ -48,7 +48,7 @@ class utilities {
             if (this.scene.sound.get('artbgm') == null) {
                 this.scene.BGMmusic.mute = true;
             }
-            this.scene.sound.play('sfx_select');
+            this.scene.sound.play('yeah');
             this.scene.scene.start("fashionScene");
         }
         if (Phaser.Input.Keyboard.JustDown(keyM)) {
@@ -56,7 +56,7 @@ class utilities {
             if (this.scene.sound.get('artbgm') == null) {
                 this.scene.BGMmusic.mute = true;
             }
-            this.scene.sound.play('sfx_select');
+            this.scene.sound.play('yeah');
             this.scene.scene.start("musicScene");
         }
         if (Phaser.Input.Keyboard.JustDown(keyT)) {
@@ -64,7 +64,7 @@ class utilities {
             if (this.scene.sound.get('artbgm') == null) {
                 this.scene.BGMmusic.mute = true;
             }
-            this.scene.sound.play('sfx_select');
+            this.scene.sound.play('yeah');
             this.scene.scene.start("tutorialScene");
         }
     }

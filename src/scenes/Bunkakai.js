@@ -40,7 +40,7 @@ class Bunkakai extends Phaser.Scene{
         // this.load.image('background', './assets/day.jpg')
 
         // load audio files
-        this.load.audio('sfx_select', './assets/iPhoneCameraSound.mp3');
+        this.load.audio('cameraSound', './assets/iPhoneCameraSound.mp3');
         this.load.audio('sfx_explosion', './assets/sagoi.wav');
         this.load.audio('sagoi', './assets/sagoi.wav');
         this.load.audio('yeah', './assets/yeah.wav');
@@ -58,6 +58,7 @@ class Bunkakai extends Phaser.Scene{
         this.load.image('nightSky', './assets/starryBackground.jpg');
         this.load.image('scoreFrame', './assets/scoreFrame.png');
         this.load.image('tutorialText', './assets/tutorialText.png');
+        this.load.image('dialogBox', './assets/dialogBox.png');
 
         // particle images
         this.load.image('circle', './assets/circle-8x8.png');

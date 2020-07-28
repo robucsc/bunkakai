@@ -62,9 +62,7 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
         if (Phaser.Input.Keyboard.JustDown(keyUP)) {
             this.jump();
         }
-
         this.levelFinish();
-
     }
 
     reset() {
@@ -124,6 +122,7 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
             this.x -= 64;
             this.body.velocity.x = -200;
             this.body.velocity.y-200;
+            this.scene.sound.play('cameraSound');
         }
     }
 
