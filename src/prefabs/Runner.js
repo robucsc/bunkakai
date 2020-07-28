@@ -117,7 +117,7 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
     }
 
     unTunnel(){
-        if (this.y >= 821){
+        if (this.y >= 821){  // if char falls through a tunnel re-spawn
             this.y = 256;
             this.x -= 64;
             this.body.velocity.x = -200;
@@ -131,12 +131,13 @@ class Runner extends Phaser.Physics.Arcade.Sprite{
             this.setAccelerationX(0);
             this.setVelocityX(0);
             if (!this.finishedLevel) {
-                this.finishedLevel = true;
+                this.finishedLevel = true; // set flag so these are only done once
                 this.scene.sound.play('sagoi');
-                this.scene.dialogBox.visible = true;
+                this.scene.dialogBox.visible = true; // show dialog at end of level
+                if (this.y > 256){ // lower dialog box if not on platform
+                    this.scene.dialogBox.y = 480;
+                }
             }
         }
-
-
     }
 }

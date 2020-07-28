@@ -57,7 +57,7 @@ class Art extends Phaser.Scene {
         this.nightSky.alpha = 1;
         this.day = this.add.tileSprite(0, 0, 1912, 1024, 'day').setOrigin(0, 0).setVisible(true);
         this.day.setScrollFactor(0);
-        this.dialogBox = this.add.tileSprite(15404, -32, 259, 308, 'dialogBox').setOrigin(0, 0).setVisible(false);
+
         // score
         var theScoreFrame = this.add.sprite(64, 46, 'scoreFrame').setScale(1.5, 1).setOrigin(0, 0); // scoreFrame desu
         theScoreFrame.setScrollFactor(0);
@@ -87,7 +87,11 @@ class Art extends Phaser.Scene {
         const tileset = groundMap.addTilesetImage('vgGrass64x64', 'grass');
 
         const worldLayer = groundMap.createStaticLayer('theGrassyKnoll', tileset, 0, 0);
-        console.log('groundMap', groundMap, 'tileset ', tileset, 'worldLayer', worldLayer)
+        // console.log('groundMap', groundMap, 'tileset ', tileset, 'worldLayer', worldLayer)
+
+        // victory dialog box at end of level
+        this.dialogBox = this.add.tileSprite(15404, -32, 259, 308, 'dialogBox').setOrigin(0, 0).setVisible(false);
+
 
         // add collectableItems
         // generate item objects from object data
@@ -140,7 +144,7 @@ class Art extends Phaser.Scene {
             new Collectable(this, 256, this.middle, 'fields', 0, 10, false),
             new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
 
-        // add player to scene
+        // add player to scene 576
         this.playerOne = new Runner(this, 576, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
 
         // add antagonist to the scene
