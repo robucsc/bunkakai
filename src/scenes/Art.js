@@ -141,8 +141,8 @@ class Art extends Phaser.Scene {
             new Collectable(this, 0, this.bottom, 'bridge', 0, 10, false)];
 
         // add player to scene
-        this.playerOne = new Runner(this, 15000, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
-        // x 576
+        this.playerOne = new Runner(this, 576, 512, 'playerRun', 0, 30, false).setScale(.75, .75).setOrigin(0, 0);
+
         // add antagonist to the scene
         this.foeOne = new Antagonist(this, 1024, 512, 'antagonistWalk', 0, 10, true).setScale(.75, .75).setOrigin(0,0);
 
